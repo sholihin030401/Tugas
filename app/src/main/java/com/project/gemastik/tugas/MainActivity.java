@@ -5,47 +5,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.EditText;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends AppCompatActivity {
+
+    private EditText editTextInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TextView gambar1 = findViewById(R.id.gambar1);
-        TextView gambar2 = findViewById(R.id.gambar2);
-        TextView gambar3 = findViewById(R.id.gambar3);
-        TextView gambar4 = findViewById(R.id.gambar4);
-        TextView gambar5 = findViewById(R.id.gambar5);
-        TextView gambar6 = findViewById(R.id.gambar6);
+        editTextInput = findViewById(R.id.edt_input);
 
-        gambar1.setOnClickListener(this);
-        gambar2.setOnClickListener(this);
-        gambar3.setOnClickListener(this);
-        gambar4.setOnClickListener(this);
-        gambar5.setOnClickListener(this);
-        gambar6.setOnClickListener(this);
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.gambar1:
+    public void startService(View v){
+        String input = editTextInput.getText().toString();
 
-            case R.id.gambar2:
+        Intent serviceIntent = new Intent(this,ExampleService.class);
+        serviceIntent.putExtra("input",input);
 
-            case R.id.gambar3:
-
-            case R.id.gambar4:
-
-            case R.id.gambar5:
-
-            case R.id.gambar6:
-                Intent intent1 = new Intent(this,Gambar.class);
-                startActivity(intent1);
-                break;
-        }
+        startService(serviceIntent);
     }
+
+    public void stopService(View v){
+        Intent serviceIntent = new Intent(this,ExampleService.class);
+        stopService(serviceIntent);
+    }
+
 }
